@@ -1,0 +1,32 @@
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# My configurations:
+db.ini
+deploy_key_rsa
+
+# dirs
+backup
+dustbin
+Uploads
+
+#zip(s)
+*.rar
+*.backup.zip
+
+# file by eclipse
+.settings
+.buildpath
+.project
+.externalToolBuilders
+
+
+# thinkPHP
+Logs
+
+Runtime/Cache
+Runtime
+Public/Upload
+/nbproject/private/
