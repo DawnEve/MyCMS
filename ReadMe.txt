@@ -1,4 +1,4 @@
-bootstrap和thinkPHP结合做后台管理
+基于bootstrap和thinkPHP结合做后台管理
 
 
 =============================================
@@ -10,6 +10,9 @@ I:\BaiduYunDownload\PHP
 
 1.配制环境、配制域名
 //my.dawneve.com
+
+2.重新熟悉一下框架细节。
+看到6 路由。
 
 首先总结一下，框架执行的大致流程： 
 index.php->载入框架->读取配置项->生成应用->载入类->框架new这些类的方法->模板渲染display展示；
@@ -27,14 +30,21 @@ index.php->载入框架->读取配置项->生成应用->载入类->框架new这�
 Think\Hook： 监听App、Action、View的各个阶段，执行Behavior
 Think\Behavior： 可配置（配置文件）可增删（代码）
 
-2.重新熟悉一下框架细节。
-看到6 路由。
+3.
+===========================完成了auth认证。比较完成的一个流程。
+http://baijunyao.com/article/67
+
+DROP TABLE IF EXISTS `tp_member`;
+create table `tp_member`(
+    id int(4) not null primary key auto_increment,
+    name char(20) not null,
+    psw char(20) not null,
+    `email` varchar(30),
+    `add_time` varchar(25)
+)ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-
-
-
-
+4.配置BootStrap到tp系统中。
 
 
 
