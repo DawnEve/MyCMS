@@ -1,7 +1,21 @@
 <layout name="Layout/main" />
-    <h1>name:{$title}</h1>
+
+<style>
+.container{margin-top:100px;}
+</style>
+<div class="container">
+	<div class="jumbotron">
+	  <h1>Hello, {$title}</h1>
+	  <p>...ERP系统</p>
+	  <p><a class="btn btn-primary btn-lg" href="{:U('Admin/Index/index')}" role="button">管理员登陆</a></p>
+
+	
+		文档：<a target="_blank" href="http://v3.bootcss.com/components/#dropdowns">bootstrap文档</a><br>
+		
+		链接：<a href="{:U('Admin/Index/index')}">后台</a> | 
+		<a href="{:U('Admin/Login/logout')}">logout</a> | 
+		<a href="{:U('Admin/Login/sh')}">show session</a> | 
+	</div>
 
 
-<a href="{:U('Login/index')}">login</a> | 
-<a href="{:U('Login/logout')}">logout</a> | 
-<a href="{:U('Login/sh')}">session show</a> | 
+</div>

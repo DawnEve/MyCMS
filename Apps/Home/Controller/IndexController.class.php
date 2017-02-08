@@ -1,9 +1,9 @@
 <?php
 namespace Home\Controller;
-//use Think\Controller;
-use Common\Controller\AuthController;
+use Think\Controller;
+// use Common\Controller\AuthController;
 
-class IndexController extends AuthController {
+class IndexController extends Controller {
     public function index(){
     	//echo "wjl index";
     	//echo "<a href='".U('login/logout')."'>退出</a>";

@@ -1,7 +1,6 @@
 <?php
 namespace Common\Controller;
 use Think\Controller;
-use Think\Auth;
 class AuthController extends Controller {
 	protected function _initialize(){
 		//先判断session
@@ -26,7 +25,7 @@ class AuthController extends Controller {
 
 		//4.其他用户需要鉴权
 		$rule_name=MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
-		$auth=new Auth();
+		$auth=new \Think\Auth();
 		if(!$auth->check($rule_name,$session_auth['id'])){
 			$this->error("没有权限",U("Home/login/index"));
 		}

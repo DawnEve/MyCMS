@@ -45,6 +45,11 @@ create table `tp_member`(
 
 
 4.配置BootStrap到tp系统中。
+bs文档：http://v3.bootcss.com/components/#dropdowns
+
+后台首页：http://my.dawneve.com/Admin/Index/index.html
+转变为前台直接查看，后台登陆操作、查看。
+
 
 
 

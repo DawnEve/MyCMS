@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Admin\Controller;
 use Think\Controller;
 
 class LoginController extends Controller{
@@ -18,14 +18,17 @@ class LoginController extends Controller{
 			if(!empty(session("auth"))){
 				redirect(U('index/index'));
 			}
+			$this->assign("title","Please login");
 			$this->display();
 		}
 	}
+	
 	
 	//读取session
 	function sh(){
 		dump($_SESSION);
 	}
+	
 	
 	/*
 	 * 退出登陆

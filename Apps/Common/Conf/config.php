@@ -2,7 +2,8 @@
 return array(
 	//'配置项'=>'配置值'
 	"URL_MODEL"=>2,//2REWRITE最友好的URL方式
-	"name"=>"jimmy",
+	"company"=>"河南普利莱生物技术有限公司",
+	"company_short"=>"普利莱",
 	
 	//允许查看的模块
 	'MODULE_ALLOW_LIST' => array('Admin','Home'),
@@ -37,5 +38,7 @@ return array(
 	"TMPL_PARSE_STRING"=>array(
 			"__BS__"=>"/Public/bootstrap-3.3.7-dist",
 			"__Public__"=>"/Public",
+			"__JS__"=>"/Public/js",
+			"__CSS__"=>"/Public/css",
 	),
 );
