@@ -1,5 +1,23 @@
-<form action="__URL__/index" method='post' >
-	用户名：<input type="text" name="user"><br>
-	密码：<input type="password" name="psw"><br>
-	<input type="submit" value="提交">
-</form>
+<layout name="Layout/main" />
+
+<!-- Custom styles for this template -->
+    <link href="__Public__/css/signin.css" rel="stylesheet">
+
+
+ <div class="container">
+
+      <form class="form-signin"  action="__URL__/index" method='post'>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="user" type="text" id="inputEmail" class="form-control" placeholder="user name" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="psw" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me" name="remember"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->

@@ -31,5 +31,11 @@ return array(
 			'AUTH_GROUP_ACCESS' => 'tp_auth_group_access', //用户组明细表
 			'AUTH_RULE' => 'tp_auth_rule', //权限规则表
 			'AUTH_USER' => 'tp_members'//用户信息表
-	)
+	),
+		
+	//加入bootstrap资源链接
+	"TMPL_PARSE_STRING"=>array(
+			"__BS__"=>"/Public/bootstrap-3.3.7-dist",
+			"__Public__"=>"/Public",
+	),
 );
