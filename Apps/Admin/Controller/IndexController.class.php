@@ -13,7 +13,10 @@ class IndexController extends AuthController {
     	$this->display();
     }
     
-    
+    function welcome(){
+    	$this->assign("data",array(1,2,3));
+    	$this->display();
+    }
     
     
     

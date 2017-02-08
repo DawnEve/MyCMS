@@ -47,11 +47,57 @@ create table `tp_member`(
 4.配置BootStrap到tp系统中。
 bs文档：http://v3.bootcss.com/components/#dropdowns
 
-后台首页：http://my.dawneve.com/Admin/Index/index.html
-转变为前台直接查看，后台登陆操作、查看。
 
 
+5.订购管理系统。Order/index(),Order/add(),
+不同数据库之间复制表的数据的方法：
+当表目标表存在时：
+	insert into 目的数据库..表 select * from 源数据库..表  
+当目标表不存在时：
+	select * into 目的数据库..表 from 源数据库..表
 
+
+CREATE TABLE MyCMS.tp_order (
+  `order_id` int(10) NOT NULL AUTO_INCREMENT,
+  `order_name` varchar(50) NOT NULL COMMENT '名字',
+  `order_unit` varchar(5) DEFAULT '单位' COMMENT '单位',
+  `order_quantity` int(10) NOT NULL DEFAULT '0' COMMENT '数量',
+  `order_price` int(10) NOT NULL DEFAULT '0' COMMENT '单价',
+  `order_note` text COMMENT '备注',
+  `order_time` varchar(30) DEFAULT NULL COMMENT '订单时间',
+  `add_time` varchar(30) DEFAULT NULL COMMENT '添加时间',
+  `modi_time` varchar(30) DEFAULT NULL COMMENT '修改时间',
+  `supplier_id` int(10) DEFAULT NULL COMMENT '供应商id',
+  `order_status` int(10) DEFAULT NULL COMMENT '状态：0表示订货，1表示到货，2表示对账，3.表示报销过',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8;
+
+insert into mycms.tp_order select * from think.think_order;
+
+
+CREATE TABLE MyCMS.tp_supplier(
+  `supplier_id` int(10) NOT NULL AUTO_INCREMENT,
+  `supplier_name` varchar(50) NOT NULL COMMENT '供应商名字',
+  `supplier_url` text COMMENT '网址',
+  `supplier_phone` varchar(25) DEFAULT NULL COMMENT '电话',
+  `supplier_QQ` varchar(25) DEFAULT NULL COMMENT 'QQ',
+  `supplier_email` varchar(25) DEFAULT NULL COMMENT 'email',
+  `supplier_person` varchar(10) DEFAULT '暂无' COMMENT '联系人',
+  PRIMARY KEY (`supplier_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+insert into mycms.tp_supplier select * from think.think_supplier;
+
+
+这个为什么是2个点号？
+ insert   库2..表2   select   字段1，字段2   from   库1..表1　where 条件
+
+===========================
+	//todo
+	弹出层怎么搞？
+	怎么防止iframe内嵌套打开？
+	怎么分页
+===========================
 
 
 

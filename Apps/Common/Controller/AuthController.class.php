@@ -12,7 +12,7 @@ class AuthController extends Controller {
 		
 		//2.超过10min不操作则自动退出
 		if(time() - $session_auth['time']>10*60){
-			$this->success("超时自动退出",U("Home/Login/logout"));
+			$this->success("超时自动退出",U("Login/logout"));
 			exit();
 		}else{
 			$_SESSION['auth']['time']=time();

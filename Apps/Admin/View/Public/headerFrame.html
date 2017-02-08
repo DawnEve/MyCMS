@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="__CSS__/dashboard.css" rel="stylesheet">
+    <link href="__CSS__/font-awesome.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -69,7 +70,7 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="{:U('Index/welcome')}" target="right_content">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Reports</a></li>
             <li><a href="#">Analytics</a></li>
             <li><a href="#">Export</a></li>
@@ -85,16 +86,10 @@
              <div id="collapseListGroup1" class="panel-collapse collapse" role="tabpanel">
                <ul class="list-group">
 	                 <li class="list-group-item">
-	                   <a href="{:U('Order/index')}" class="menu-item-left">订单列表</a>
+	                   <a href="{:U('Order/index')}" class="menu-item-left" target="right_content">订单列表</a>
 	                 </li>
 	                 <li class="list-group-item">
-	                   <a href="{:U('Order/add')}" class="menu-item-left">添加订单</a>
-	                 </li>
-	                 <li class="list-group-item">
-	                   <a href="{:U('Order/edit')}" class="menu-item-left">修改订单</a>
-	                 </li>
-	                 <li class="list-group-item">
-	                   <a href="{:U('Order/del')}" class="menu-item-left">删除订单</a>
+	                   <a href="{:U('Order/add')}" class="menu-item-left" target="right_content">添加订单</a>
 	                 </li>
                </ul>
            </div>
@@ -111,7 +106,7 @@
             <li><a href="">One more nav</a></li>
             <li><a href="">Another nav item</a></li>
           </ul>
-         </div> 
+         </div>
         
         
         

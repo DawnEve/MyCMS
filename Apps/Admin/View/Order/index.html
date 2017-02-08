@@ -1,0 +1,84 @@
+<include file="Public/headerRight" /> 
+     
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+	<ol class="breadcrumb">
+	  <li><a href="{:U('Admin/Index/welcome')}">后台</a></li>
+	  <li><a href="{:U('Admin/Order/index')}">订单管理</a></li>
+	  <li class="active">订单列表</li>
+	</ol>
+
+
+<ul id="myTab" class="nav nav-tabs">
+	<li class="active">
+		<a href="{:U('Order/index')}" data-toggle="tab">订单列表</a>
+	</li>
+	<li>
+		<a href="{:U('Order/add')}" >添加订单</a>
+	</li>
+</ul>
+
+
+
+          <!-- div class="row placeholders">
+  
+            <div class="col-xs-9 placeholder">
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Label</h4>
+              <span class="text-muted">Something else</span>
+            </div>
+          </div-->
+          
+
+          <h2 class="sub-header">
+          	<if condition="$current_supplier_name neq null"> 从 {$current_supplier_name} 订货明细
+	          	<else /> 所有明细
+          	</if>
+          	
+          </h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+					<th>订单编号</th>
+					<th>供货商</th>
+					<th>订货时间</th>
+					<th>试剂、耗材名字</th>
+					<th>单位</th>
+					<th>数量</th>
+					<th>单价</th>
+					<th>金额</th>
+					<th>备注</th>
+					<th>添加日期</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+		<volist name="order" id="vo" empty="暂时没有数据">
+			<tr>
+				<td>{$vo.order_id}</td>
+				<td><?php if($vo['supplier_id']<0){ 
+						echo "其他"; } else{
+					
+					echo '<a href="'; 
+					echo U('Order/index',array('supplier_id'=>$vo['supplier_id']));
+					echo '">'.$vo['supplier_name'].'</a>';
+					 }?>
+				 </td>
+				<td>{$vo.order_time|intval|date='Y-m-d',###}</td>
+				<td style="text-align:left; padding-left:5px;">{$vo.order_name}</td>
+				<td>{$vo.order_unit}</td>
+				<td>{$vo.order_quantity}</td>
+				<td>{$vo.order_price}</td>
+				<td>{$vo['order_quantity']*$vo['order_price']}</td>
+				<td>{$vo.order_note}</td>
+				<td class=light><span title="{$vo.add_time|intval|date='Y-m-d H:i:s',###}">*</span></td>
+			</tr>
+         </volist>
+               
+               
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>

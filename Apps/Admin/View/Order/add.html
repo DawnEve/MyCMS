@@ -1,0 +1,70 @@
+<include file="Public/headerRight" />
+<js href="/Public/Js/Order.js" />
+     
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+	<ol class="breadcrumb">
+	  <li><a href="{:U('Admin/Index/welcome')}">后台</a></li>
+	  <li><a href="{:U('Admin/Order/index')}">订单管理</a></li>
+	  <li class="active">添加订单</li>
+	</ol>
+         
+<style>
+	.form-group{margin:10px 0;}
+	.form-group span{padding:0 10px;}
+	.table th, .table td { 
+		text-align: center;
+		vertical-align: middle!important;
+	}
+</style>
+          <h2 class="sub-header">添加订单</h2><hr>
+          
+          
+          <div class="table-responsive">
+	<form method='post' action="__URL__/insert"  onsubmit="return checkFrom();" class="form-inline" role="form">
+			<div class="form-group">
+				<span class=info>供应商：<select id="mySelect" name='supplier_id'>
+					<volist name="supplier" id="vo" empty="暂时没有数据">
+						<option value='{$vo.supplier_id}'>{$vo.supplier_name}</option>
+					</volist>
+					<option value=-1>其他</option>
+				</select></span>
+				
+				<span class=info>订单时间：<input type="text" name="order_time" placeholder="20170101"></span>
+				
+				<span class=info>总金额：<span id='total'>0</span>元</span>
+			</div>
+			
+			<div class="form-group">
+				<table id=moreTr  class="table table-striped">
+					<tr class=text-center>
+						<th>编号</th>
+						<th>名字</th>
+						<th>单位</th>
+						<th>数量</th>
+						<th>单价</th>
+						<th>金额</th>
+						<th>备注</th>
+					</tr>
+					
+					<tr>
+						<td><span>1</span></td>
+						<td><input type="text" name="order_name[]"></td>
+						<td><input type="text" name="order_unit[]"></td>
+						<td><input type="text" onchange="calc1(1)" name="order_quantity[]"></td>
+						<td><input type="text" onchange="calc1(1)" name="order_price[]"></td>
+						<td><input type="text" disabled=true value=0></span></td>
+						<td><input type="text" name="order_note[]"></td>
+					</tr>
+				</table>
+			</div>
+
+			<input type='button' onclick="addTr()" value="添加一行" class="btn btn-default" title="名字为空的行不记入数据库。">
+			<div class='pull-right'>
+				<input type='submit' value='提交' class="btn btn-info">
+			</div>
+		</form>
+
+          </div>
+        </div>
+      </div>
