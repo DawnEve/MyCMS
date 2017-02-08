@@ -98,7 +98,12 @@ insert into mycms.tp_supplier select * from think.think_supplier;
 	怎么防止iframe内嵌套打开？
 	怎么分页
 ===========================
+5.2 实现 Order/del().
+
+ajax删除：http://www.thinkphp.cn/topic/8988.html
+bootstrap弹出框： http://www.jb51.net/article/76013.htm
 
 
+	5.3 Order/edit(),
 
 

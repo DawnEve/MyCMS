@@ -125,9 +125,7 @@ function checkFrom(){
 	}
 	
 	//如果第一行没有东西，也不行
-	
-	
-	
+
 	return (true);
 }
 

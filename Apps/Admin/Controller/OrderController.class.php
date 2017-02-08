@@ -85,6 +85,19 @@ class OrderController extends AuthController {
             }
     }
 
+    //删除条目
+    function del($id){
+    	if(empty($id)){
+    		echo $this->ajaxReturn(array(0,'没有传入id!'));
+    		exit();
+    	}
+    	$rs=M('order')->where('order_id='.$id)->delete();
+    	if($rs){
+	    	echo $this->ajaxReturn(array($rs,'删除成功'));    		
+    	}else{
+	    	$this->ajaxReturn(array(0,'删除失败')); 
+    	}
+    }
 
     //显示全部
     public function archive(){
