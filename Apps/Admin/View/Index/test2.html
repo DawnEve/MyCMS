@@ -1,0 +1,30 @@
+<html>
+<head>
+<script type="text/javascript">
+function n(s){
+	var obj=document.getElementById("check1");
+
+	s=obj.checked;
+	s += obj.value
+	console.log(s);
+}
+function check(){
+  	document.getElementById("check1").checked=true
+  	n();
+}
+function uncheck(){
+  	document.getElementById("check1").checked=false
+  	n();
+}
+</script>
+</head>
+<body>
+
+<form>
+<input type="checkbox" id="check1" value="123"/>
+<input type="button" onclick="check()" value="Check Checkbox" />
+<input type="button" onclick="uncheck()" value="Uncheck Checkbox" />
+</form>
+
+</body>
+</html>

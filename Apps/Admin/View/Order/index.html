@@ -52,27 +52,27 @@
 	    选择 <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a href="#">全选</a></li>
+	    <li><a href="javascript:void(0);" id=chk_all>全选</a></li>
 	    <li role="separator" class="divider"></li>
-	    <li><a href="#">反选</a></li>
+	    <li><a href="javascript:void(0);" id=chk_invert>反选</a></li>
 	  </ul>
 	</div>
 	
 	
 	
-	<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    设置为 <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">订货</a></li>
-    <li><a href="#">到货</a></li>
-    <li><a href="#">对账</a></li>
-    <li role="separator" class="divider"></li>
-    <li><a href="#">报销</a></li>
-  </ul>
-</div>
+	<!-- 报销状态按钮Single button -->
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    设置为 <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="#">订货</a></li>
+	    <li><a href="#">到货</a></li>
+	    <li><a href="#">对账</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a href="#">报销</a></li>
+	  </ul>
+	</div>
 
 
 	<!-- 选择按钮组  button 
@@ -222,3 +222,27 @@ function order_del(id){
 
 
 
+<script type="text/javascript">
+
+$(function() {
+	//全选
+	$("#chk_all").click(function(){
+	     $("input[name='select[]']:checkbox").prop("checked",true);
+	});
+	
+	//反选
+	$("#chk_invert").click(function(){
+        $("input[name='select[]']:checkbox").each(function(i,o){
+            $(o).prop("checked",!$(o).prop("checked"));
+        });
+    });
+	
+	
+	
+	//对选择部分更换标签
+	
+	
+	
+	
+});
+</script>

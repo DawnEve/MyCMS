@@ -181,7 +181,28 @@ CREATE TABLE `tp_order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8
 
 
-5.6 
+5.6 jq全选、反选
+checkbox标签已有checked=checked但是不显示勾选？不用attr，使用prop
+
+$(function() {
+	//全选
+	$("#chk_all").click(function(){
+	     $("input[name='chk_list']").prop("checked",true);
+	});
+	
+	//反选
+	$("#chk_invert2").click(function(){
+        $("input[name='chk_list']:checkbox").each(function(i,o){
+            $(o).prop("checked",!$(o).prop("checked"));
+        });
+    });
+});
+
+
+
+
+
+	5.x 添加分类功能：分为报销、未报销等。
 
 	5.x Order/edit(),
 
