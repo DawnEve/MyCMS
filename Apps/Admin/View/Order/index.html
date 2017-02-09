@@ -53,6 +53,7 @@
 	  </button>
 	  <ul class="dropdown-menu">
 	    <li><a href="javascript:void(0);" id=chk_all>全选</a></li>
+	    <li><a href="javascript:void(0);" id=chk_cancel>取消全选</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li><a href="javascript:void(0);" id=chk_invert>反选</a></li>
 	  </ul>
@@ -65,12 +66,12 @@
 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    设置为 <span class="caret"></span>
 	  </button>
-	  <ul class="dropdown-menu">
-	    <li><a href="#">订货</a></li>
-	    <li><a href="#">到货</a></li>
-	    <li><a href="#">对账</a></li>
+	  <ul class="dropdown-menu" id="setAs">
+	    <li><a href="javascript:void(0);">订货</a></li>
+	    <li><a href="javascript:void(0);">到货</a></li>
+	    <li><a href="javascript:void(0);">对账</a></li>
 	    <li role="separator" class="divider"></li>
-	    <li><a href="#">报销</a></li>
+	    <li><a href="javascript:void(0);">报销</a></li>
 	  </ul>
 	</div>
 
@@ -223,11 +224,15 @@ function order_del(id){
 
 
 <script type="text/javascript">
-
+//顶部几个按钮组
 $(function() {
 	//全选
 	$("#chk_all").click(function(){
 	     $("input[name='select[]']:checkbox").prop("checked",true);
+	});
+	//取消选择
+	$("#chk_cancel").click(function(){
+	     $("input[name='select[]']:checkbox").prop("checked",false);
 	});
 	
 	//反选
@@ -239,7 +244,29 @@ $(function() {
 	
 	
 	
-	//对选择部分更换标签
+	//对被选项更换status
+	$("#setAs a").each(function(index,obj){
+		$(obj).click(function(e){
+			//1.获取目标status
+			var t_status=index;
+			//2.获取选择了哪些条目？
+			var list=[];
+			$("input[name='select[]']:checkbox").each(function(i,o){
+	            if($(o).prop("checked")){
+	            	list.push(o.value);
+	            }
+	        });
+			//如果没有选择条目，则弹出提示框
+			if(list.length==0){
+				toastr.warning("请选择需要操作的条目");
+				return;
+			}
+			
+			//3.发送ajax请求，修改数据
+	        console.log(t_status,list);
+		});
+	});
+	
 	
 	
 	
