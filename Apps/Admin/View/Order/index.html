@@ -1,6 +1,8 @@
-<include file="Public/headerRight" /> 
-     
-	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<layout name="Layout/right" />
+
+<style>
+.table-responsive table{ margin-bottom:20px; }
+</style>
 
 	<ol class="breadcrumb">
 	  <li><a href="{:U('Admin/Index/welcome')}">后台</a></li>
@@ -28,14 +30,14 @@
           </div-->
           
 
+   	<if condition="$current_supplier_name neq null"> 
           <h2 class="sub-header">
-          	<if condition="$current_supplier_name neq null"> 
           		从 {$current_supplier_name} 订货明细
           		<a href="{:U('index')}" class="btn btn-default" title="查看全部订购星系">查看全部</a>
-          	</if>
           </h2>
+   	</if>
           	
-          	
+<br>         	
 <div class="alert alert-success" role="alert">
   <strong>注：</strong> 按照订单订购时间逆序排列。
 </div>
@@ -87,8 +89,7 @@
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
+
 
 
     <!-- Placed at the end of the document so the pages load faster -->
