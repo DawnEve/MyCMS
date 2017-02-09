@@ -7,24 +7,31 @@ class OrderController extends AuthController {
         if($supplier_id>0){
             //http://tp.dawneve.com/order/index/supplier_id/1
             $data=M('order')->alias('a')
-                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
+                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time,order_status, add_time, a.supplier_id,b.supplier_name')
                             ->join('__SUPPLIER__ b ON a.supplier_id = b.supplier_id', 'LEFT')
-                            ->where('a.supplier_id=' . $supplier_id . ' and a.order_status >0')
+//                             ->where('a.supplier_id=' . $supplier_id . ' and a.order_status >0')
+                            ->where('a.supplier_id=' . $supplier_id)
                             ->order('order_time DESC,order_id DESC')
                             ->select();
 	        $this->assign('current_supplier_name', $data[0]['supplier_name']);
         }else{
             //http://tp.dawneve.com/order/
              $data=M('order')->alias('a')
-                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
+                            ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time,order_status, add_time, a.supplier_id,b.supplier_name')
                             ->join('__SUPPLIER__ b ON a.supplier_id = b.supplier_id', 'LEFT')
-                            ->where('a.order_status >0')
+                            //->where('a.order_status >0')
                             ->order('order_time DESC,order_id DESC')
                             ->select();
             $this->assign('current_supplier_name',"");
         }
-        
+        //dump($data[0]);die();
         $this->assign('order', $data);
+        $this->assign('order_status_arr', array(
+        		0=>"订货",
+        		1=>"到货",
+        		2=>"对账",
+        		3=>"报销",
+        ));
         $this->display('Order/index');
     }
     

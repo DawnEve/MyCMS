@@ -35,6 +35,10 @@ class LoginController extends Controller{
 	 * */
 	function logout(){
 		session("[destroy]");
+		//http://www.cnblogs.com/BensonHe/archive/2011/01/15/1936159.html
+		//如果是iframe，则刷新外部窗口。
+		echo "<script>if(parent.location.href!=document.location.href){
+			parent.location.reload();};</script>";
 		$this->success('退出成功！',U("Login/index"));
 	}
 }

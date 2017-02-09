@@ -123,8 +123,65 @@ bootstrap弹出框： http://www.jb51.net/article/76013.htm
 	“zebra_dialog居然没推荐，不管是常规模式样式，还是扁平样式的都很漂亮，很好用”
 ===============================
 
-5.5 添加订单状态，显示是否已经报销。
 
+5.5 删除使用bootbox提示。添加订单状态，显示是否已经报销。添加按钮。
+==========================================
+Bootbox.js： https://github.com/makeusabrew/bootbox
+
+alert
+bootbox.alert(message, callback)
+
+prompt
+bootbox.prompt(message, callback)
+
+confirm
+bootbox.confirm(message, callback)
+
+Each of these three functions calls a fourth public function which you too can use to create your own custom dialogs:
+bootbox.dialog(options)
+==========================================
+
+bootbox.confirm({
+    title: "Destroy planet?",
+    message: "Do you want to activate the Deathstar now? This cannot be undone.",
+    buttons: {
+        cancel: {
+            label: '<i class="fa fa-times"></i> Cancel'
+        },
+        confirm: {
+            label: '<i class="fa fa-check"></i> Confirm'
+        }
+    },
+    callback: function (result) {
+        console.log('This was logged in the callback: ' + result);
+    }
+});
+
+
+//修改toast看不到问题：
+http://blog.csdn.net/wk313753744/article/details/40394583/
+<style>
+	.toast-top-center {	top: 40px;}
+</style>
+
+
+CREATE TABLE `tp_order` (
+  `order_id` int(10) NOT NULL AUTO_INCREMENT,
+  `order_name` varchar(50) NOT NULL COMMENT '名字',
+  `order_unit` varchar(5) DEFAULT '单位' COMMENT '单位',
+  `order_quantity` int(10) NOT NULL DEFAULT '0' COMMENT '数量',
+  `order_price` int(10) NOT NULL DEFAULT '0' COMMENT '单价',
+  `order_note` text COMMENT '备注',
+  `order_time` varchar(30) DEFAULT NULL COMMENT '订单时间',
+  `add_time` varchar(30) DEFAULT NULL COMMENT '添加时间',
+  `modi_time` varchar(30) DEFAULT NULL COMMENT '修改时间',
+  `supplier_id` int(10) DEFAULT NULL COMMENT '供应商id',
+  `order_status` int(10) DEFAULT NULL COMMENT '状态：0表示订货，1表示到货，2表示对账，3.表示报销过',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=208 DEFAULT CHARSET=utf8
+
+
+5.6 
 
 	5.x Order/edit(),
 

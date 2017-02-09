@@ -2,6 +2,10 @@
 
 <style>
 .table-responsive table{ margin-bottom:20px; }
+	.table th, .table td { 
+		text-align: center;
+		vertical-align: middle!important;
+	}
 </style>
 
 	<ol class="breadcrumb">
@@ -40,13 +44,61 @@
 <br>         	
 <div class="alert alert-success" role="alert">
   <strong>注：</strong> 按照订单订购时间逆序排列。
+
+
+	<!-- 选择按钮组  button -->
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    选择 <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="#">全选</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a href="#">反选</a></li>
+	  </ul>
+	</div>
+	
+	
+	
+	<!-- Single button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    设置为 <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">订货</a></li>
+    <li><a href="#">到货</a></li>
+    <li><a href="#">对账</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">报销</a></li>
+  </ul>
 </div>
+
+
+	<!-- 选择按钮组  button 
+	标签说明：
+<span class="label label-info" title='0'>订货</span>
+<span class="label label-danger" title='1'>到货</span>
+<span class="label label-warning" title='2'>对账</span>
+<span class="label label-success" title='3'>报销</span>
+  
+	<span class="label label-default">Default</span>
+	<span class="label label-primary">Primary</span>
+-->
+
+
+</div>
+
+
+
+
+
           	
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
                 <tr>
-					<th>订单编号</th>
+					<th>#</th>
 					<th>供货商</th>
 					<th>订货时间</th>
 					<th>试剂、耗材名字</th>
@@ -55,7 +107,6 @@
 					<th>单价</th>
 					<th>金额</th>
 					<th>备注</th>
-					<th>添加日期</th>
 					<th>操作</th>
                 </tr>
               </thead>
@@ -63,10 +114,20 @@
               
 		<volist name="order" id="vo" empty="暂时没有数据">
 			<tr>
-				<td>{$vo.order_id}</td>
-				<td><?php if($vo['supplier_id']<0){ 
+				<td><input type="checkbox" name="select[]" value={$vo.order_id} title="选中该条目">
+						{$vo.order_id}
+					<span class="label 
+						<if condition="$vo.order_status eq 0"> label-info
+						<elseif condition="$vo.order_status eq 1" />label-danger
+						<elseif condition="$vo.order_status eq 2" />label-warning
+						<elseif condition="$vo.order_status eq 3" />label-success
+						</if>
+						">
+						<?php echo $order_status_arr[$vo['order_status']]; ?>
+					</span>
+				</td>
+				<td><?php if($vo['supplier_id']<0){
 						echo "其他"; } else{
-					
 					echo '<a href="'; 
 					echo U('Order/index',array('supplier_id'=>$vo['supplier_id']));
 					echo '">'.$vo['supplier_name'].'</a>';
@@ -78,8 +139,7 @@
 				<td>{$vo.order_quantity}</td>
 				<td>{$vo.order_price}</td>
 				<td>{$vo['order_quantity']*$vo['order_price']}</td>
-				<td>{$vo.order_note}</td>
-				<td class=light><span title="{$vo.add_time|intval|date='Y-m-d H:i:s',###}">*</span></td>
+				<td>{$vo.order_note}<span title="{$vo.add_time|intval|date='Y-m-d H:i:s',###}">*</span></td>
 				<td><a href="{:U('Order/edit',array('id'=>$vo['order_id']))}">修改</a> | 
 					<a href="javascript:order_del({$vo['order_id']})">删除</a></td>
 			</tr>
@@ -100,6 +160,7 @@
 <!-- toast -->
 <link href="__CSS__/toastr.min.css" rel="stylesheet">
 <script src="__JS__/toastr.min.js"></script>
+
 <script>
 toastr.options = {
   "closeButton": true,
@@ -122,21 +183,42 @@ toastr.options = {
 //toastr["success"](" ", "提示：删除成功")
 </script>
 
+
+
+<script src="__JS__/bootbox.js"></script>
 <script>
 function order_del(id){
 	var url="{:U('Order/del')}";
-	if(confirm("你确定要删除id="+id+"的条目吗？")){
-		//ajax删除
-		$.post(url, { action:"post",id:id }, 
-		function(json){
-			//console.log(json)
-			if(json[0]==1){
-				toastr["success"]("", "提示：删除成功");
-				setTimeout(function(){
-					document.location.href=document.location.href;
-				},800);
-			}
-		});
-	}
+	bootbox.confirm({
+	    title: "删除确认",
+	    message: "确定要删除id="+id+"的条目吗? 该操作不可恢复.",
+	    buttons: {
+	        cancel: {
+	            label: '<i class="fa fa-times"></i> 取消'
+	        },
+	        confirm: {
+	            label: '<i class="fa fa-check"></i> 确认'
+	        }
+	    },
+	    callback: function (result) {
+	        //console.log('This was logged in the callback: ' + result);
+	        if(result){
+				//ajax删除
+				$.post(url, { action:"post",id:id }, 
+				function(json){
+					//console.log(json)
+					if(json[0]==1){
+						toastr["success"]("", "提示：删除成功");
+						setTimeout(function(){
+							document.location.href=document.location.href;
+						},800);
+					}
+				});
+	        }
+	    }
+	});
 }
 </script>
+
+
+
