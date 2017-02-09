@@ -10,7 +10,7 @@ class OrderController extends AuthController {
                             ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
                             ->join('__SUPPLIER__ b ON a.supplier_id = b.supplier_id', 'LEFT')
                             ->where('a.supplier_id=' . $supplier_id . ' and a.order_status >0')
-                            ->order('order_id DESC')
+                            ->order('order_time DESC,order_id DESC')
                             ->select();
 	        $this->assign('current_supplier_name', $data[0]['supplier_name']);
         }else{
@@ -19,7 +19,7 @@ class OrderController extends AuthController {
                             ->field('order_id, order_name, order_unit, order_quantity, order_price, order_note, order_time, add_time, a.supplier_id,b.supplier_name')
                             ->join('__SUPPLIER__ b ON a.supplier_id = b.supplier_id', 'LEFT')
                             ->where('a.order_status >0')
-                            ->order('order_id DESC')
+                            ->order('order_time DESC,order_id DESC')
                             ->select();
             $this->assign('current_supplier_name',"");
         }

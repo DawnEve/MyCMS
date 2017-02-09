@@ -103,7 +103,27 @@ insert into mycms.tp_supplier select * from think.think_supplier;
 ajax删除：http://www.thinkphp.cn/topic/8988.html
 bootstrap弹出框： http://www.jb51.net/article/76013.htm
 
+5.3 修改title，修改add()页js小数点。
+5.4 del()删后toast式通知。
+===============================
+	添加toast效果：https://github.com/CodeSeven/toastr
+	// Display a warning toast, with no title
+	toastr.warning('My name is Inigo Montoya. You killed my father, prepare to die!')
+	
+	// Display a success toast, with a title
+	toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+	
+	// Display an error toast, with a title
+	toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+	
+	// Clears the current list of toasts
+	toastr.clear()
 
-	5.3 Order/edit(),
+	更多通知效果：https://www.oschina.net/news/57207/best-jquery-notification-plugins
+	“zebra_dialog居然没推荐，不管是常规模式样式，还是扁平样式的都很漂亮，很好用”
+===============================
+
+
+	5.x Order/edit(),
 
 

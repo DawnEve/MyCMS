@@ -100,14 +100,14 @@ function calc1(num){
 		aInput[3].focus();
 	}
 	//计算当前行：	
-	aInput[4].value=aInput[3].value*aInput[2].value 
+	aInput[4].value=Math.round(aInput[3].value*aInput[2].value*100)/100; 
 	
 	//计算总金额
 	var sum=0;
 	for(var i=1;i<aTr.length;i++){
-		sum += parseInt(aTr[i].getElementsByTagName('input')[4].value);
+		sum += parseFloat(aTr[i].getElementsByTagName('input')[4].value);
 	}
-	$id("total").innerHTML=sum;
+	$id("total").innerHTML=Math.round(sum*100)/100;
 }
 
 

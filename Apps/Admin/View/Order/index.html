@@ -29,11 +29,17 @@
           
 
           <h2 class="sub-header">
-          	<if condition="$current_supplier_name neq null"> 从 {$current_supplier_name} 订货明细
-	          	<else /> 所有明细
+          	<if condition="$current_supplier_name neq null"> 
+          		从 {$current_supplier_name} 订货明细
+          		<a href="{:U('index')}" class="btn btn-default" title="查看全部订购星系">查看全部</a>
           	</if>
-          	
           </h2>
+          	
+          	
+<div class="alert alert-success" role="alert">
+  <strong>注：</strong> 按照订单订购时间逆序排列。
+</div>
+          	
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -89,6 +95,32 @@
     <script src="__JS__/jquery.min.js"></script>
     <script src="__BS__/js/bootstrap.min.js"></script>
     
+    
+<!-- toast -->
+<link href="__CSS__/toastr.min.css" rel="stylesheet">
+<script src="__JS__/toastr.min.js"></script>
+<script>
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": true,
+  //"progressBar": true,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "1000",
+  "extendedTimeOut": "800",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+//toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+//toastr["success"](" ", "提示：删除成功")
+</script>
+
 <script>
 function order_del(id){
 	var url="{:U('Order/del')}";
@@ -98,8 +130,10 @@ function order_del(id){
 		function(json){
 			//console.log(json)
 			if(json[0]==1){
-				alert("删除成功！");
-				document.location.href=document.location.href;
+				toastr["success"]("", "提示：删除成功");
+				setTimeout(function(){
+					document.location.href=document.location.href;
+				},800);
 			}
 		});
 	}

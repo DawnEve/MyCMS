@@ -1,5 +1,17 @@
 <include file="Public/headerRight" />
 <js href="/Public/Js/Order.js" />
+<style>
+	.form-group{margin-bottom:10px;}
+	.form-group span.info{padding:0 20px;}
+	.form-group span.info input{padding:3px;}
+	.table th, .table td { 
+		text-align: center;
+		vertical-align: middle!important;
+	}
+	#mySelect{padding:3px;min-width:150px;}
+	.center-block{display:table;}
+	.center-block input{margin:20px;}
+</style>
      
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -9,19 +21,25 @@
 	  <li class="active">添加订单</li>
 	</ol>
          
-<style>
-	.form-group{margin:10px 0;}
-	.form-group span{padding:0 10px;}
-	.table th, .table td { 
-		text-align: center;
-		vertical-align: middle!important;
-	}
-</style>
-          <h2 class="sub-header">添加订单</h2><hr>
-          
-          
+<ul id="myTab" class="nav nav-tabs">
+	<li>
+		<a href="{:U('Order/index')}" data-toggle="tab">订单列表</a>
+	</li>
+	<li class="active">
+		<a href="{:U('Order/add')}" >添加订单</a>
+	</li>
+</ul>
+
+          <h2 class="sub-header"></h2>
+
+    
+<div class="alert alert-success" role="alert">
+  <strong>注：</strong> 订单时间是指订购到货时间，一般填写小票时间。
+</div>    
+
+  
           <div class="table-responsive">
-	<form method='post' action="__URL__/insert"  onsubmit="return checkFrom();" class="form-inline" role="form">
+	<form method='post' action="__URL__/insert"  onsubmit="return checkFrom();" class="form" role="form">
 			<div class="form-group">
 				<span class=info>供应商：<select id="mySelect" name='supplier_id'>
 					<volist name="supplier" id="vo" empty="暂时没有数据">
@@ -33,6 +51,7 @@
 				<span class=info>订单时间：<input type="text" name="order_time" placeholder="20170101"></span>
 				
 				<span class=info>总金额：<span id='total'>0</span>元</span>
+				<input type='button' onclick="addTr()" value="添加一行" class="btn btn-default" title="名字为空的行不记入数据库。">
 			</div>
 			
 			<div class="form-group">
@@ -59,9 +78,11 @@
 				</table>
 			</div>
 
-			<input type='button' onclick="addTr()" value="添加一行" class="btn btn-default" title="名字为空的行不记入数据库。">
-			<div class='pull-right'>
-				<input type='submit' value='提交' class="btn btn-info">
+			<div class="form-group">
+				<div class="center-block">
+					<input type='submit' value='添加' class="btn btn-lg btn-info">
+					<input type='reset' value='取消' class="btn btn-lg btn-default">
+				</div>
 			</div>
 		</form>
 
