@@ -86,7 +86,7 @@ class OrderController extends AuthController {
             }
 
             if($result){
-                $this->success('添加成功');
+                $this->success('添加成功',U("index"),1);
             }else{
                 $this->error('添加失败！');
             }
@@ -120,7 +120,30 @@ class OrderController extends AuthController {
             $this->display();
     }
 
-
+    //改变订单状态
+    function status(){
+    	if(!IS_AJAX){
+    		$this->ajaxReturn(array(0,"非法访问"));
+    		exit();
+    	}
+    	
+    	$status=I("post.status");
+    	$list=I("post.list");
+    	$list=join('","',$list);
+    	
+    	//实例化对象
+    	$data=array("order_status"=>$status);
+    	$order=M('order');
+    	$rs=$order->where('order_id in ("'.$list.'")')->setField($data);
+    	
+    	//返回结果
+    	if($rs){
+	    	$this->ajaxReturn(array(1,'成功修改了'.$rs.'条记录.'));
+    	}else{
+	    	$this->ajaxReturn(array(0,'失败：已经是类别。'.$order->getError()));
+    	}
+    }
+    
 
     //防范非法操作
     function _empty(){

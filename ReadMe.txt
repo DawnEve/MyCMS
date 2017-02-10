@@ -198,10 +198,14 @@ $(function() {
     });
 });
 
-5.7 添加分类功能：分为报销、未报销等。
+5.7 添加分类功能：分为订货、到货、对账、保障等。
+==============================
+//调试：输出变量到文件。
+function mylog($some){
+	file_put_contents('backup/log.txt',var_export($some,true));
+}
+==============================
 
-
-
-	5.x Order/edit(),
+5.8 Order/edit(),
 
 

@@ -210,9 +210,13 @@ function order_del(id){
 					//console.log(json)
 					if(json[0]==1){
 						toastr["success"]("", "提示：删除成功");
-						setTimeout(function(){
+						$("input[value="+id+"]~span").parent().parent().remove();
+						//删除该行
+						/*setTimeout(function(){
 							document.location.href=document.location.href;
-						},800);
+						},800);*/
+					}else if(json[0]==0){
+						toastr['error']("",json[1]);
 					}
 				});
 	        }
@@ -243,7 +247,6 @@ $(function() {
     });
 	
 	
-	
 	//对被选项更换status
 	$("#setAs a").each(function(index,obj){
 		$(obj).click(function(e){
@@ -263,7 +266,32 @@ $(function() {
 			}
 			
 			//3.发送ajax请求，修改数据
-	        console.log(t_status,list);
+	        //console.log(t_status,list);
+			var url="{:U('Order/status')}";
+			$.post(url, { action:"post",status:t_status,list:list}, 
+			function(json){
+				var text=['订货','到货','对账','报销'];
+				var classes=[
+				             'label label-info',
+				             'label label-danger',
+				             'label label-warning',
+				             'label label-success',
+				      ];
+				
+				//console.log(json)
+				if(json[0]==1){
+					toastr["success"]("", json[1]);
+					//修改对应的标签内容和样式
+					for(var i=0;i<list.length;i++){
+						$item=$("input[value="+list[i]+"]~span");//获取对应id的checkbox下一个span元素
+						$item.text(text[t_status]);//修改文字
+						$item.removeAttr('class');
+						$item.addClass(classes[t_status]);//修改class
+					}
+				}else if(json[0]==0){
+					toastr['error']("",json[1]);
+				}
+			});
 		});
 	});
 	
