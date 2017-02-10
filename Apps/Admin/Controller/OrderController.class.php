@@ -171,7 +171,7 @@ class OrderController extends AuthController {
             $this->display();
     }
 
-    //改变订单状态
+    //改变订单状态：订货、到货、对账、报销。
     public function status(){
     	if(!IS_AJAX){
     		$this->ajaxReturn(array(0,"非法访问"));
@@ -195,7 +195,11 @@ class OrderController extends AuthController {
     	}
     }
     
-
+	//汇总、统计
+    function summary(){
+    	$this->display();
+    }
+    
     //防范非法操作
     function _empty(){
         echo 'This page ['.CONTROLLER_NAME . '->' .ACTION_NAME. '] is not found!';

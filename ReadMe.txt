@@ -208,6 +208,9 @@ function mylog($some){
 
 5.8 Order/edit(),
 
+5.9 添加统计结果。
+http://www.cnblogs.com/zeroone/archive/2013/08/04/3236022.html
+http://blog.csdn.net/ACMAIN_CHM/article/details/4283943
 
 
 
