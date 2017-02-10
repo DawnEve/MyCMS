@@ -43,8 +43,17 @@ class OrderController extends AuthController {
 	        $this->assign('supplier', $supplier);
 			$this->display();
 		}else{
-			dump($_POST);
+			$this->insert();
 		}
+	}
+	
+	//由于20170101获取时间戳
+	private function _getTimeStamp($time){
+		$y=substr($time,0,4);
+		$m=substr($time,4,2);
+		$d=substr($time,6,2);
+		//int mktime(时, 分, 秒, 月, 日, 年)
+		return mktime(0, 0, 0, $m, $d, $y);
 	}
 
     //插入
@@ -54,11 +63,7 @@ class OrderController extends AuthController {
             if($time==""){
                 $_POST['order_time']=time();
             }else{
-            	$y=substr($time,0,4);
-                $m=substr($time,4,2);
-                $d=substr($time,6,2);
-                //int mktime(时, 分, 秒, 月, 日, 年)
-                $_POST['order_time']= mktime(0, 0, 0, $m, $d, $y);
+                $_POST['order_time']= $this->_getTimeStamp($time);
             }
 
             $data=array(
@@ -68,6 +73,8 @@ class OrderController extends AuthController {
                 "add_time"=>time(),
             );
 
+            
+            //需要使用事务保证数据一致性
             $result=1;
             $form=D('order');
             for($i=0;$i<count($_POST['order_name']);$i++){
@@ -81,7 +88,7 @@ class OrderController extends AuthController {
 
                 $form->create($data);
                 if(!$form->add()){
-                        $result *= 0;
+                    $result *= 0;
                 }
             }
 
@@ -90,6 +97,50 @@ class OrderController extends AuthController {
             }else{
                 $this->error('添加失败！');
             }
+    }
+    
+    //编辑表单
+    function edit(){
+    	if(!IS_POST){
+    		$id=I('get.id');
+    		if(empty($id)){
+    			$this->error("please input an id",U('index'));
+    		}
+    		$data=M("order")->find($id);
+    		$this->assign('data',$data);
+    		$this->assign('supplier',M('supplier')->select());
+    		$this->display();
+    	}else{
+    	 	//如果order_time为空，则补充为当前时间
+            $time=I("order_time");
+            if($time==""){
+                $_POST['order_time']=time();
+            }else{
+                $_POST['order_time']= $this->_getTimeStamp($time);
+            }
+
+            $data=array(
+                "supplier_id"=>I("supplier_id"),
+                "order_time"=>I("order_time"),
+                "order_status"=>1,
+                "add_time"=>time(),
+            );
+            
+            //需要使用事务保证数据一致性
+    	    $form=D('order');
+            $data['order_name']=I('order_name');
+            $data['order_unit']=I('order_unit');
+            $data['order_quantity']=I('order_quantity');
+            $data['order_price']=I('order_price');
+            $data['order_note']=I('order_note');
+            $data['order_id']=I('order_id');
+			//创建表格
+            if($form->save($data)){
+                $this->success('修改成功',U("index"),1);
+            }else{
+                $this->error('修改失败！');
+            }
+    	}
     }
 
     //删除条目
@@ -121,7 +172,7 @@ class OrderController extends AuthController {
     }
 
     //改变订单状态
-    function status(){
+    public function status(){
     	if(!IS_AJAX){
     		$this->ajaxReturn(array(0,"非法访问"));
     		exit();

@@ -37,13 +37,13 @@
    	<if condition="$current_supplier_name neq null"> 
           <h2 class="sub-header">
           		从 {$current_supplier_name} 订货明细
-          		<a href="{:U('index')}" class="btn btn-default" title="查看全部订购星系">查看全部</a>
+          		<a href="{:U('index')}" class="btn btn-default" title="查看全部订购星系">返回全部订单</a>
           </h2>
    	</if>
           	
 <br>         	
 <div class="alert alert-success" role="alert">
-  <strong>注：</strong> 按照订单订购时间逆序排列。
+  <strong>注：</strong> 按照订单订购时间逆序排列。单击经销商筛选该经销商订货信息。
 
 
 	<!-- 选择按钮组  button -->
@@ -53,7 +53,7 @@
 	  </button>
 	  <ul class="dropdown-menu">
 	    <li><a href="javascript:void(0);" id=chk_all>全选</a></li>
-	    <li><a href="javascript:void(0);" id=chk_cancel>取消全选</a></li>
+	    <li><a href="javascript:void(0);" id=chk_cancel>取消选择</a></li>
 	    <li role="separator" class="divider"></li>
 	    <li><a href="javascript:void(0);" id=chk_invert>反选</a></li>
 	  </ul>
@@ -100,7 +100,7 @@
               <thead>
                 <tr>
 					<th>#</th>
-					<th>供货商</th>
+					<th>经销商</th>
 					<th>订货时间</th>
 					<th>试剂、耗材名字</th>
 					<th>单位</th>
