@@ -3,7 +3,7 @@
 function getSumsBy($s,$o,$data){
 	foreach($data as $item){
 		if($item['supplier_name']==$s && $item['order_status']==$o){
-			return $item["sums"];
+			return 0+$item["sums"];
 		}
 	}
 	return 0;

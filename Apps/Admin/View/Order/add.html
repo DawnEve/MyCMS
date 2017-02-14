@@ -26,11 +26,12 @@
          
 <ul id="myTab" class="nav nav-tabs">
 	<li>
-		<a href="{:U('Order/index')}" data-toggle="tab">订单列表</a>
+		<a href="{:U('Order/index')}">订单列表</a>
 	</li>
 	<li class="active">
 		<a>添加订单</a>
 	</li>
+	<li><a href="{:U('Order/summary')}">订单统计</a></li>
 </ul>
 
 <br>    
@@ -80,7 +81,7 @@
 
 			<div class="form-group">
 				<div class="center-block">
-					<input type='submit' value='添加' class="btn btn-lg btn-info">
+					<input type='submit' value='提交' class="btn btn-lg btn-info">
 					<input type='reset' value='取消' class="btn btn-lg btn-default">
 				</div>
 			</div>

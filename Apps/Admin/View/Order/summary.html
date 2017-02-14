@@ -17,7 +17,7 @@
 
 <ul id="myTab" class="nav nav-tabs">
 	<li>
-		<a href="{:U('Order/index')}" data-toggle="tab">订单列表</a>
+		<a href="{:U('Order/index')}">订单列表</a>
 	</li>
 	<li>
 		<a href="{:U('Order/add')}" >添加订单</a>
@@ -29,8 +29,7 @@
           	
 <br>   	
 <div class="alert alert-success" role="alert">
-  <strong>注：</strong> 各经销商供货价格汇总表，单位：人民币元。
-
+  <strong>注：</strong> 各经销商供货金额汇总表，单位：人民币元。
 </div>
 
 
@@ -42,11 +41,10 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-					<th>公司</th>
-					<th>订货</th>
-					<th>到货</th>
-					<th>对账</th>
-					<th>报销</th>
+					<th>公司名</th>
+					<volist name="status_arr" id="status" empty="暂时没有数据">
+						<th>{$status[1]}</th>
+					</volist>
                 </tr>
               </thead>
               <tbody>
@@ -55,8 +53,9 @@
 			<tr>
 					<td>{$supplier.supplier_name}</td>
 				<volist name="status_arr" id="status" empty="暂时没有数据">
-					<td><?php 
-						echo getSumsBy($supplier['supplier_name'],$status[0],$data);
+					<td><?php
+						$sums = getSumsBy($supplier['supplier_name'],$status[0],$data);
+						echo $sums;
 					?></td>
 				</volist>
 				
@@ -73,3 +72,40 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="__JS__/jquery.min.js"></script>
     <script src="__BS__/js/bootstrap.min.js"></script>
+    
+<script>
+//function n(s){console.log(s)}
+
+$(function(){
+	var xlen=$("table").find('tr').eq(1).find('td').length-1;
+	var ylen=len=$("table").find('tr').length-2;
+	
+	$("table").find('tr').each(function(i, el_tr) {
+	    //行合计
+	    if(i != 0){
+	      var sum = 0;
+	      $(el_tr).find('td').each(function(index, el_td) {
+	        if(index > 0 && index < xlen){
+	          var val = $(el_td).text();
+	          sum += parseFloat(val);
+	        }else if(index == xlen){
+	          $(el_td).html("<b>"+sum+"</b>");
+	        }
+	      });
+	    }
+	  });
+	    //列合计
+	    for(var i=2;i<ylen;i++){
+	    	var tds=$("table").find('tr').find('td:nth-child('+i+')');
+		    var sum=0;
+	    	$(tds).each(function(index,el_td){
+	    		if(index>=0 && index<ylen){
+	    			var val = $(el_td).text();
+	    			sum += parseFloat(val);
+	    		}else if(index == ylen){
+	  	          $(el_td).html("<b>"+sum+"</b>");
+		        }
+	    	})
+	    }
+});
+</script>

@@ -22,6 +22,28 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="__JS__/ie10-viewport-bug-workaround.js"></script>
     
-    
+   
+   <script>
+$(function(){
+	
+	//=================================
+	//搜索框
+	//$("#search").keyup(function(){
+		
+	
+		
+		
+	$("#search").keyup(function(){
+		var word=$(this).val();
+		$("#content-iframe").contents().find("table tbody tr").hide()
+//		$("table tbody tr").hide()
+			.filter(":contains('"+ $(this).val() +"')").show();
+		//console.log(word)
+	}).keyup();// 防止刷新后数据框还有值，而内容没有过滤。
+	
+	
+	
+});
+</script> 
   </body>
 </html>

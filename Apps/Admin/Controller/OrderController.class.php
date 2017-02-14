@@ -43,61 +43,16 @@ class OrderController extends AuthController {
 	        $this->assign('supplier', $supplier);
 			$this->display();
 		}else{
-			$this->insert();
+			if(D('order')->insert()){
+				//$this->success('添加成功',U("index"),1);
+				$this->redirect('index',array(),0,'添加成功');
+			}else{
+				$this->error('添加失败！');
+			}
 		}
 	}
 	
-	//由于20170101获取时间戳
-	private function _getTimeStamp($time){
-		$y=substr($time,0,4);
-		$m=substr($time,4,2);
-		$d=substr($time,6,2);
-		//int mktime(时, 分, 秒, 月, 日, 年)
-		return mktime(0, 0, 0, $m, $d, $y);
-	}
 
-    //插入
-    public function insert(){
-            //如果order_time为空，则补充为当前时间
-            $time=I("order_time");
-            if($time==""){
-                $_POST['order_time']=time();
-            }else{
-                $_POST['order_time']= $this->_getTimeStamp($time);
-            }
-
-            $data=array(
-                "supplier_id"=>I("supplier_id"),
-                "order_time"=>I("order_time"),
-                "order_status"=>1,
-                "add_time"=>time(),
-            );
-
-            
-            //需要使用事务保证数据一致性
-            $result=1;
-            $form=D('order');
-            for($i=0;$i<count($_POST['order_name']);$i++){
-            	$data['order_name']=$_POST['order_name'][$i];
-                $data['order_unit']=$_POST['order_unit'][$i];
-                $data['order_quantity']=$_POST['order_quantity'][$i];
-                $data['order_price']=$_POST['order_price'][$i];
-                $data['order_note']=$_POST['order_note'][$i];
-
-                if($data['order_name']=="") continue;
-
-                $form->create($data);
-                if(!$form->add()){
-                    $result *= 0;
-                }
-            }
-
-            if($result){
-                $this->success('添加成功',U("index"),1);
-            }else{
-                $this->error('添加失败！');
-            }
-    }
     
     //编辑表单
     function edit(){
@@ -116,7 +71,7 @@ class OrderController extends AuthController {
             if($time==""){
                 $_POST['order_time']=time();
             }else{
-                $_POST['order_time']= $this->_getTimeStamp($time);
+                $_POST['order_time']= _getTimeStamp($time);
             }
 
             $data=array(
@@ -136,7 +91,7 @@ class OrderController extends AuthController {
             $data['order_id']=I('order_id');
 			//创建表格
             if($form->save($data)){
-                $this->success('修改成功',U("index"),1);
+                $this->redirect('index',array(),0,'修改成功');
             }else{
                 $this->error('修改失败！');
             }
@@ -199,12 +154,10 @@ class OrderController extends AuthController {
     function summary(){
     	$data=D("Order")->getSummary();
     	
-    	$supplier_arr=M('supplier')->field("supplier_id,supplier_name")->select(); //dump($supplier_arr);
-    	$status_arr=C("ORDER_STATUS"); //dump($status_arr);
     	
-    	$this->assign('data',$data);
-    	$this->assign('supplier_arr',$supplier_arr);
-    	$this->assign('status_arr',$status_arr);
+    	$this->assign('data',$data[0]);
+    	$this->assign('supplier_arr',$data[1]);
+    	$this->assign('status_arr',$data[2]);
     	$this->display();
     }
     

@@ -219,10 +219,12 @@ http://blog.csdn.net/ACMAIN_CHM/article/details/4283943
 
 todo//还缺少小结功能。
 
+5.9.2 jq统计小结，jq关键字筛选表格。
+使用jq前端统计行列小结：
+	http://www.oschina.net/question/55163_152410?sort=time
 
-
-
-
+index页加入jQuery关键字筛选功能。
+加入到父窗口中。
 
 
 
