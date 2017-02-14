@@ -41,4 +41,16 @@ return array(
 			"__JS__"=>"/Public/js",
 			"__CSS__"=>"/Public/css",
 	),
+		
+		
+	//加入订单状态
+	"ORDER_STATUS"=>array(
+			//编号，描述，标签颜色
+			array(0,'订货','#111'),
+			array(1,'到货','#222'),
+			array(2,'对账','#333'),
+			array(3,'报销','#444'),
+	),
+		
+		
 );

@@ -27,39 +27,9 @@
 	</li>
 </ul>
           	
-<br>         	
+<br>   	
 <div class="alert alert-success" role="alert">
-  <strong>注：</strong> 按照订单订购时间逆序排列。单击经销商筛选该经销商订货信息。
-
-
-	<!-- 选择按钮组  button -->
-	<div class="btn-group">
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    选择 <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu">
-	    <li><a href="javascript:void(0);" id=chk_all>全选</a></li>
-	    <li><a href="javascript:void(0);" id=chk_cancel>取消选择</a></li>
-	    <li role="separator" class="divider"></li>
-	    <li><a href="javascript:void(0);" id=chk_invert>反选</a></li>
-	  </ul>
-	</div>
-	
-	
-	
-	<!-- 报销状态按钮Single button -->
-	<div class="btn-group">
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    设置为 <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" id="setAs">
-	    <li><a href="javascript:void(0);">订货</a></li>
-	    <li><a href="javascript:void(0);">到货</a></li>
-	    <li><a href="javascript:void(0);">对账</a></li>
-	    <li role="separator" class="divider"></li>
-	    <li><a href="javascript:void(0);">报销</a></li>
-	  </ul>
-	</div>
+  <strong>注：</strong> 各经销商供货价格汇总表，单位：人民币元。
 
 </div>
 
@@ -72,48 +42,24 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-					<th>#</th>
-					<th>经销商</th>
+					<th>公司</th>
 					<th>订货</th>
 					<th>到货</th>
 					<th>对账</th>
 					<th>报销</th>
-					<th>总金额</th>
-					<th>未报销</th>
                 </tr>
               </thead>
               <tbody>
               
-		<volist name="order" id="vo" empty="暂时没有数据">
+		<volist name="supplier_arr" id="supplier" empty="暂时没有数据">
 			<tr>
-				<td><input type="checkbox" name="select[]" value={$vo.order_id} title="选中该条目">
-						{$vo.order_id}
-					<span class="label 
-						<if condition="$vo.order_status eq 0"> label-info
-						<elseif condition="$vo.order_status eq 1" />label-danger
-						<elseif condition="$vo.order_status eq 2" />label-warning
-						<elseif condition="$vo.order_status eq 3" />label-success
-						</if>
-						">
-						<?php echo $order_status_arr[$vo['order_status']]; ?>
-					</span>
-				</td>
-				<td><?php if($vo['supplier_id']<0){
-						echo "其他"; } else{
-					echo '<a href="'; 
-					echo U('Order/index',array('supplier_id'=>$vo['supplier_id']));
-					echo '">'.$vo['supplier_name'].'</a>';
-					 }?>
-				 </td>
-				<td>{$vo.order_time|intval|date='Y-m-d',###}</td>
-				<td style="text-align:left; padding-left:5px;">{$vo.order_name}</td>
-				<td>{$vo.order_unit}</td>
-				<td>{$vo.order_quantity}</td>
-				<td>{$vo.order_price}</td>
-				<td>{$vo['order_quantity']*$vo['order_price']}</td>
-				<td>{$vo.order_note}<span title="{$vo.add_time|intval|date='Y-m-d H:i:s',###}">*</span></td>
-				<td><a href="{:U('Order/edit',array('id'=>$vo['order_id']))}">修改</a> | 
-					<a href="javascript:order_del({$vo['order_id']})">删除</a></td>
+					<td>{$supplier.supplier_name}</td>
+				<volist name="status_arr" id="status" empty="暂时没有数据">
+					<td><?php 
+						echo getSumsBy($supplier['supplier_name'],$status[0],$data);
+					?></td>
+				</volist>
+				
 			</tr>
          </volist>
                

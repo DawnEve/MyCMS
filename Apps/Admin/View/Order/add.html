@@ -1,5 +1,4 @@
 <layout name="Layout/right" />
-
 <js href="/Public/Js/Order.js" />
 <style>
 	.form-group{margin-bottom:10px;}
@@ -12,6 +11,9 @@
 	#mySelect{padding:3px;min-width:150px;}
 	.center-block{display:table;}
 	.center-block input{margin:20px;}
+
+	.form-group td input[type="text"]{padding:0 5px;}
+	.form-group td input.short{max-width:100px;}
 </style>
      
 
@@ -44,7 +46,6 @@
 					<volist name="supplier" id="vo" empty="暂时没有数据">
 						<option value='{$vo.supplier_id}'>{$vo.supplier_name}</option>
 					</volist>
-					<option value=-1>其他</option>
 				</select></span>
 				
 				<span class=info>订单时间：<input type="text" name="order_time" placeholder="20170101"></span>
@@ -68,10 +69,10 @@
 					<tr>
 						<td><span>1</span></td>
 						<td><input type="text" name="order_name[]"></td>
-						<td><input type="text" name="order_unit[]"></td>
-						<td><input type="text" onchange="calc1(1)" name="order_quantity[]"></td>
-						<td><input type="text" onchange="calc1(1)" name="order_price[]"></td>
-						<td><input type="text" disabled=true value=0></span></td>
+						<td><input type="text" name="order_unit[]" class='short' placeholder="瓶，个，包..."></td>
+						<td><input type="text" onchange="calc1(1)" name="order_quantity[]" class='short'></td>
+						<td><input type="text" onchange="calc1(1)" name="order_price[]" class='short'></td>
+						<td><input type="text" disabled=true value=0 class='short'></span></td>
 						<td><input type="text" name="order_note[]"></td>
 					</tr>
 				</table>

@@ -197,8 +197,18 @@ class OrderController extends AuthController {
     
 	//汇总、统计
     function summary(){
+    	$data=D("Order")->getSummary();
+    	
+    	$supplier_arr=M('supplier')->field("supplier_id,supplier_name")->select(); //dump($supplier_arr);
+    	$status_arr=C("ORDER_STATUS"); //dump($status_arr);
+    	
+    	$this->assign('data',$data);
+    	$this->assign('supplier_arr',$supplier_arr);
+    	$this->assign('status_arr',$status_arr);
     	$this->display();
     }
+    
+
     
     //防范非法操作
     function _empty(){

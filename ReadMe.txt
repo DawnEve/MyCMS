@@ -212,6 +212,17 @@ function mylog($some){
 http://www.cnblogs.com/zeroone/archive/2013/08/04/3236022.html
 http://blog.csdn.net/ACMAIN_CHM/article/details/4283943
 
+5.9.1 统计
+公司id=0表示其他。
+更新order表。不用。。。
+修改add，edit代码。只有view去掉一行。
+
+todo//还缺少小结功能。
+
+
+
+
+
 
 
 
